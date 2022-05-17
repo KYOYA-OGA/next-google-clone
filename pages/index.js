@@ -1,5 +1,7 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Header from '../components/Header';
+import { SearchIcon, MicrophoneIcon } from '@heroicons/react/solid';
 
 export default function Home() {
   return (
@@ -10,6 +12,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+
+      <form className="grid place-items-center mt-20 lg:mt-40">
+        <Image
+          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png"
+          alt="google logo"
+          width={300}
+          height={100}
+          objectFit="cover"
+        />
+        <div className="mt-5 flex w-full max-w-[90%] justify-center items-center space-x-3 border border-gray-200 px-5 py-3 rounded-full focus-within:shadow-md sm:max-w-xl lg:max-w-2xl">
+          <SearchIcon className="h-5 text-gray-600" />
+          <input type="text" className="grow focus:outline-none" />
+          <MicrophoneIcon className="h-5" />
+        </div>
+        <div className="mt-5 flex justify-center flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-5">
+          <button className="btn">Google Search</button>
+          <button className="btn">I&lsquo;m feeling Lucky</button>
+        </div>
+      </form>
     </div>
   );
 }
