@@ -3,8 +3,21 @@ import Image from 'next/image';
 import Header from '../components/Header';
 import { SearchIcon, MicrophoneIcon } from '@heroicons/react/solid';
 import Footer from '../components/Footer';
+import { useRouter } from 'next/router';
+import { useRef } from 'react';
 
 export default function Home() {
+  const router = useRouter();
+  const searchInputRef = useRef(null);
+
+  function search(event) {
+    event.preventDefault();
+    const term = searchInputRef.current.value;
+    if (!term.trim()) return;
+
+    router.push(`/search?term=${term.trim()}`);
+  }
+
   return (
     <div>
       <Head>
@@ -24,11 +37,17 @@ export default function Home() {
         />
         <div className="mt-5 flex w-full max-w-[90%] justify-center items-center space-x-3 border border-gray-200 px-5 py-3 rounded-full focus-within:shadow-md sm:max-w-xl lg:max-w-2xl">
           <SearchIcon className="h-5 text-gray-600" />
-          <input type="text" className="grow focus:outline-none" />
+          <input
+            ref={searchInputRef}
+            type="text"
+            className="grow focus:outline-none"
+          />
           <MicrophoneIcon className="h-5" />
         </div>
         <div className="mt-5 flex justify-center flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-5">
-          <button className="btn">Google Search</button>
+          <button onClick={search} className="btn">
+            Google Search
+          </button>
           <button className="btn">I&lsquo;m feeling Lucky</button>
         </div>
       </form>
