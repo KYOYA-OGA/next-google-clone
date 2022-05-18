@@ -10,12 +10,21 @@ export default function Home() {
   const router = useRouter();
   const searchInputRef = useRef(null);
 
-  function search(event) {
+  function handleSearch(event) {
     event.preventDefault();
     const term = searchInputRef.current.value;
     if (!term.trim()) return;
 
     router.push(`/search?term=${term.trim()}&searchType=`);
+  }
+
+  async function handleRandomSearch(event) {
+    event.preventDefault();
+    const randomTerm = await fetch(
+      'https://random-word-api.herokuapp.com/word?number=1'
+    ).then((response) => response.json());
+    if (!randomTerm) return;
+    router.push(`/search?term=${randomTerm[0]}&searchType=`);
   }
 
   return (
@@ -45,10 +54,12 @@ export default function Home() {
           <MicrophoneIcon className="h-5" />
         </div>
         <div className="mt-5 flex justify-center flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-5">
-          <button onClick={search} className="btn">
+          <button onClick={handleSearch} className="btn">
             Google Search
           </button>
-          <button className="btn">I&lsquo;m feeling Lucky</button>
+          <button onClick={handleRandomSearch} className="btn">
+            I&lsquo;m feeling Lucky
+          </button>
         </div>
       </form>
       <Footer />
