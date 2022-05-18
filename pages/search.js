@@ -6,7 +6,6 @@ import Response from '../Response';
 
 export default function Search({ results }) {
   const router = useRouter();
-  const searchInfo = results.searchInformation;
   return (
     <>
       <Head>
@@ -14,7 +13,7 @@ export default function Search({ results }) {
       </Head>
       <SearchHeader />
       <div className="container px-3 mx-auto lg:px-0 lg:max-w-5xl">
-        <SearchResults searchInfo={searchInfo} />
+        <SearchResults results={results} />
       </div>
     </>
   );
