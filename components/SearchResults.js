@@ -4,12 +4,12 @@ import PaginationButtons from './PaginationButtons';
 
 export default function SearchResults({ results }) {
   return (
-    <div>
+    <div className="container px-3 lg:px-0 mx-auto lg:max-w-5xl">
       <p className="text-gray-600 text-sm mb-5 mt-3">
         About {results.searchInformation.formattedTotalResults} results (
         {results.searchInformation.formattedSearchTime} seconds)
       </p>
-      {results.items.map((result, index) => (
+      {results.items?.map((result) => (
         <div className="max-w-xl mb-8" key={result.link}>
           <div className="group">
             <a className="text-sm truncate" href={result.link}>
